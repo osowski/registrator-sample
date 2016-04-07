@@ -1,4 +1,4 @@
-# Microservice dynamica auto-scaling example
+# Microservice dynamic auto-scaling example
 
 This sample application will run Let's Chat, an open-sourced team-based chat application, in a dynamically scalable, auto load-balanced fashion.
 
@@ -16,7 +16,9 @@ This sample application will run Let's Chat, an open-sourced team-based chat app
 3. Consul Template, built into our Nginx container, queries Consul for available services and automatically generates an nginx.conf file, based on the available services.
 4. Nginx then round-robins the load across all the available services that Consul says exist.
 5. As Docker Compose scales the number of Let's Chat services, Registrator automatically registers these new instances in Consul.
-6. Consul Template detects the changes in Consul, regenerates an updated nginx.conf with the new service endpoints, & then reloads the nginx configuration for updated _upstream_ servers.
+6. Consul Template detects the changes in Consul, regenerates an updated nginx.conf with the new service endpoints, and then reloads the nginx configuration for updated _upstream_ servers.
+
+To dig deeper on the application & interaction flow, see [Reference Links](#reference-links) **#2** and **#4** below where other teams have already documented this quite well.
 
 ## Pre-requisites
 
@@ -68,11 +70,11 @@ This sample application will run Let's Chat, an open-sourced team-based chat app
 
 ### Reference links:
 
-- [Registrator Quickstart](http://gliderlabs.com/registrator/latest/user/quickstart/)
-- [Load-balancing Docker containers with Nginx and Consul-Template](https://tech.bellycard.com/blog/load-balancing-docker-containers-with-nginx-and-consul-template/)
-- [GitHub: bellycard/docker-loadbalancer](https://github.com/bellycard/docker-loadbalancer)
-- [A production ready Docker workflow. Part 4: Service Discovery and the load balancer](http://www.luiselizondo.net/a-production-ready-docker-workflow-part-4-service-discovery-and-the-load-balancer/)
-- [Registrator Issue: Wrong IP assigned](https://github.com/gliderlabs/registrator/issues/169#)
+1. [Registrator Quickstart](http://gliderlabs.com/registrator/latest/user/quickstart/)
+2. [Load-balancing Docker containers with Nginx and Consul-Template](https://tech.bellycard.com/blog/load-balancing-docker-containers-with-nginx-and-consul-template/)
+3. [GitHub: bellycard/docker-loadbalancer](https://github.com/bellycard/docker-loadbalancer)
+4. [A production ready Docker workflow. Part 4: Service Discovery and the load balancer](http://www.luiselizondo.net/a-production-ready-docker-workflow-part-4-service-discovery-and-the-load-balancer/)
+5. [Registrator Issue: Wrong IP assigned](https://github.com/gliderlabs/registrator/issues/169#)
 
 ### Key changes from reference links:
 
