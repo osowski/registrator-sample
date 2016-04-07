@@ -18,7 +18,7 @@ This sample application will run Let's Chat, an open-sourced team-based chat app
 5. As Docker Compose scales the number of Let's Chat services, Registrator automatically registers these new instances in Consul.
 6. Consul Template detects the changes in Consul, regenerates an updated nginx.conf with the new service endpoints, and then reloads the nginx configuration for updated _upstream_ servers.
 
-To dig deeper on the application & interaction flow, see [Reference Links](#reference-links) **#2** and **#4** below where other teams have already documented this quite well.
+To dig deeper on the application & interaction flow, see [Reference Links](#reference-links) **#2** and **#4** below where other teams have already documented this quite well  The majority of the _nginx_ configuration files are based on [Reference Links](#reference-links) **#3** GitHub repository below.
 
 ## Pre-requisites
 
