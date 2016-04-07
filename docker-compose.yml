@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+
+  consul:
+    image:  gliderlabs/consul-server:latest
+    command: "-advertise=${MYHOST} -server -bootstrap"
+    container_name: consul
+    hostname: ${MYHOST}
+    ports:
+    - 8500:8500
+
+  registrator:
+    image: gliderlabs/registrator:latest
+    command: "-ip ${MYHOST} consul://${MYHOST}:8500"
+    container_name: registrator
+    hostname: ${MYHOST}
+    depends_on:
+    - consul
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+
+  mongo:
+    image: mongo:latest
+    depends_on:
+    - registrator
+
+  lets-chat:
+    build: lets-chat/
+    image: osowski/lets-chat
+    depends_on:
+    - mongo
+    environment:
+    - SERVICE_NAME=lets-chat
+    #- SERVICE_80_NAME=http
+    #- SERVICE_TAGS=dev
+    links:
+    - mongo
+    ports:
+    - 8080
+
+  nginx:
+    build: nginx/
+    image: local-proxy-nginx
+    depends_on:
+    - consul
+    links:
+    - consul
+    ports:
+    - 80:80
